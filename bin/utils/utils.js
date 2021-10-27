@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-10-26 20:18:18
+ * @LastEditTime: 2021-10-27 15:55:53
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \pc-build-cli\bin\utils\utils.js
+ */
 const fs = require('fs')
 const path = require('path')
 const { spawn } = require('child_process')
@@ -12,9 +20,14 @@ const print = require('./print')
 const enOrder = (order, overErr = false, returnInfo = false) => {
   return new Promise((resolve, reject) => {
     if (!order) reject('命令不能为空！')
-    const child = spawn(order, {
-      shell: true
-    })
+    try {
+      const child = spawn(order, {
+        shell: true
+      })
+      
+    } catch (error) {
+      console.log(error)
+    }
     child.stdout.on('data', data => {
       print.info(data.toString())
     })
