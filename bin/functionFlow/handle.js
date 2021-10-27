@@ -15,6 +15,7 @@ let isGit = false
 
 // * 成功处理
 const successOn = resolve => {
+  debugger
   return data => {
     load.succeed()
     console.log(data)
@@ -175,8 +176,8 @@ exports.getShortLog = (name,gitUrl) => {
     //   console.log(res)
     // })
 
-    // utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
-    utils.enOrderByPath(config.runPath(isProject, name),shell.shortLog(), true).then(successOn(resolve), errorOn(reject))
+    utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
+    // utils.enOrderByPath(config.runPath(isProject, name),shell.shortLog(), true).then(successOn(resolve), errorOn(reject))
     load.succeed()
   })
 }
