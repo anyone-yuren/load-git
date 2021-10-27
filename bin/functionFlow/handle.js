@@ -17,7 +17,7 @@ let isGit = false
 const successOn = resolve => {
   return data => {
     load.succeed()
-    console.log(data.tostring())
+    console.log(data)
     resolve(data)
   }
 }
