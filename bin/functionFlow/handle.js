@@ -160,6 +160,22 @@ exports.fetchCode = (name, gitUrl, branch) => {
 }
 
 /**
+ * @description: 
+ * @param {*} name 项目名称
+ * @param {*} gitUrl git 地址
+ * @return {*}
+ */
+exports.getShortLog = (name,gitUrl) => {
+  return new Promise((resolve, reject) => {
+    print.tip(`开始获取 ${name} 代码的贡献者数据...`)
+    utils.enOrder('git shortlog --numbered', true, true).then((data) => {
+      console.log(data.tostring())
+      resolve(data)
+    })
+  })
+}
+
+/**
  * todo 校验分支是否切换成功
  * @param {*} name 项目名称
  * @param {*} branch git 分支
