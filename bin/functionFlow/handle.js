@@ -176,7 +176,7 @@ exports.getShortLog = (name,gitUrl) => {
     // })
 
     // utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
-    utils.enOrderByPath('./',shell.shortLog(), true).then(successOn(resolve), errorOn(reject))
+    utils.enOrderByPath(config.runPath(isProject, name),shell.shortLog(), true).then(successOn(resolve), errorOn(reject))
     load.succeed()
   })
 }
