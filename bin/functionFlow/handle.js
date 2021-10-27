@@ -171,7 +171,10 @@ exports.getShortLog = (name,gitUrl) => {
     print.tip(`开始获取 ${name} 代码的贡献者数据...`)
     print.order('git shortlog --numbered')
     load.start()
-   utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
+    utils.getVersion('git shortlog --numbered').then(res=> {
+      console.log(res)
+    })
+  //  utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
     load.succeed()
   })
 }
