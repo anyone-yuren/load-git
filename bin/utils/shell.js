@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-10-26 20:18:18
- * @LastEditTime: 2021-10-27 17:11:46
+ * @LastEditTime: 2021-10-27 17:54:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \pc-build-cli\bin\utils\shell.js
@@ -44,7 +44,7 @@ const yarn = () => 'yarn'
 const build = order => `yarn ${order}`
 
 // 获取维护者信息
-const shortLog = () => `git shortlog --numbered`
+const shortLog = () => `git shortlog`
 
 const shell = {
   ls,
