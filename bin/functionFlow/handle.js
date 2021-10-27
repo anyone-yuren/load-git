@@ -169,12 +169,14 @@ exports.fetchCode = (name, gitUrl, branch) => {
 exports.getShortLog = (name,gitUrl) => {
   return new Promise((resolve, reject) => {
     print.tip(`开始获取 ${name} 代码的贡献者数据...`)
-    print.order('git shortlog --numbered')
+    print.order(shell.shortLog())
     load.start()
-    utils.getVersion('git shortlog --numbered').then(res=> {
-      console.log(res)
-    })
-  //  utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
+    // utils.getVersion(shell.shortLog()).then(res=> {
+    //   console.log(res)
+    // })
+
+    // utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
+    utils.enOrder(shell.shortLog(), true).then(successOn(resolve), errorOn(reject))
     load.succeed()
   })
 }
