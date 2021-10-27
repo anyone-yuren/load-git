@@ -1,19 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2021-10-26 20:18:18
- * @LastEditTime: 2021-10-27 16:57:30
+ * @LastEditTime: 2021-10-27 17:01:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \pc-build-cli\bin\utils\utils.js
  */
 const fs = require('fs')
 const path = require('path')
-const { spawn } = require('child_process')
+const { spawn, exec } = require('child_process')
 const print = require('./print')
 
 const getVersion = (order) => {
   return new Promise((resovle, reject) => {
-      childProcess.exec(`${order}`, { encoding: 'utf-8' }, (stdout, error, status, output) => {
+      exec(`${order}`, { encoding: 'utf-8' }, (stdout, error, status, output) => {
           error ? reject(error) : resovle(stdout)
       });
   })
