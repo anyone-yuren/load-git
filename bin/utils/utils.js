@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-10-26 20:18:18
- * @LastEditTime: 2021-10-27 18:04:08
+ * @LastEditTime: 2021-10-27 18:42:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \pc-build-cli\bin\utils\utils.js
@@ -19,6 +19,7 @@ const gitExec = command => (
 
     thread.stdout.on('data', (data) => {
       stdOut.push(data.toString('utf8'));
+      print.info(data.toString('utf8'))
     });
 
     thread.stderr.on('data', (data) => {
