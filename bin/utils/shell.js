@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-10-26 20:18:18
- * @LastEditTime: 2021-10-27 17:08:08
- * @LastEditors: your name
+ * @LastEditTime: 2021-10-27 17:11:46
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \pc-build-cli\bin\utils\shell.js
  */
