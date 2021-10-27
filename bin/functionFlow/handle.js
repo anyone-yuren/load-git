@@ -170,10 +170,7 @@ exports.getShortLog = (name,gitUrl) => {
   return new Promise((resolve, reject) => {
     print.tip(`开始获取 ${name} 代码的贡献者数据...`)
     load.start()
-   utils.enOrder('git shortlog --numbered', true, true).then((data) => {
-      console.log(data.tostring())
-      resolve(data)
-    })
+   utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
     load.succeed()
   })
 }
