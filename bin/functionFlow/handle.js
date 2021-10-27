@@ -17,6 +17,7 @@ let isGit = false
 const successOn = resolve => {
   return data => {
     load.succeed()
+    console.log(data)
     resolve(data)
   }
 }
@@ -156,6 +157,27 @@ exports.fetchCode = (name, gitUrl, branch) => {
       utils.enOrder(order, true).then(successOn(resolve), errorOn(reject))
       load.succeed()
     }
+  })
+}
+
+/**
+ * @description: 
+ * @param {*} name 项目名称
+ * @param {*} gitUrl git 地址
+ * @return {*}
+ */
+exports.getShortLog = (name,gitUrl) => {
+  return new Promise((resolve, reject) => {
+    print.tip(`开始获取 ${name} 代码的贡献者数据...`)
+    print.order(shell.shortLog())
+    load.start()
+    // utils.getVersion(shell.shortLog()).then(res=> {
+    //   console.log(res)
+    // })
+
+    // utils.enOrder('git shortlog --numbered', true).then(successOn(resolve), errorOn(reject))
+    utils.enOrderByPath(config.runPath(isProject, name),shell.shortLog(), true).then(successOn(resolve), errorOn(reject))
+    load.succeed()
   })
 }
 

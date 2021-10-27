@@ -1,7 +1,23 @@
+/*
+ * @Author: your name
+ * @Date: 2021-10-26 20:18:18
+ * @LastEditTime: 2021-10-27 17:01:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \pc-build-cli\bin\utils\utils.js
+ */
 const fs = require('fs')
 const path = require('path')
-const { spawn } = require('child_process')
+const { spawn, exec } = require('child_process')
 const print = require('./print')
+
+const getVersion = (order) => {
+  return new Promise((resovle, reject) => {
+      exec(`${order}`, { encoding: 'utf-8' }, (stdout, error, status, output) => {
+          error ? reject(error) : resovle(stdout)
+      });
+  })
+}
 
 /**
  * todo 运行命令
@@ -12,23 +28,29 @@ const print = require('./print')
 const enOrder = (order, overErr = false, returnInfo = false) => {
   return new Promise((resolve, reject) => {
     if (!order) reject('命令不能为空！')
-    const child = spawn(order, {
-      shell: true
-    })
-    child.stdout.on('data', data => {
-      print.info(data.toString())
-    })
-    child.stderr.on('data', data => {
-      // 错误格式处理
-      if (overErr) {
-        print.red(data.toString())
-      } else {
-        reject(data.toString())
-      }
-    })
-    child.on('close', data => {
-      resolve(returnInfo ? data : true)
-    })
+    try {
+      console.log(order);
+      const child = spawn(order, {
+        shell: true
+      })
+      child.stdout.on('data', data => {
+        print.info(data.toString())
+      })
+      child.stderr.on('data', data => {
+        // 错误格式处理
+        if (overErr) {
+          print.red(data.toString())
+        } else {
+          reject(data.toString())
+        }
+      })
+      child.on('close', data => {
+        resolve(returnInfo ? data : true)
+      })
+      
+    } catch (error) {
+      console.log(error)
+    }
   })
 }
 
@@ -85,7 +107,8 @@ const deleteFolderSync = path => {
 const utils = {
   enOrder,
   enOrderByPath,
-  deleteFolderSync
+  deleteFolderSync,
+  getVersion
 }
 
 module.exports = utils

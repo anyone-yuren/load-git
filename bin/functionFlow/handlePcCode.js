@@ -1,4 +1,4 @@
-const { pathCheck, clearStashCode, stashCode, checkoutTest, fetchCode } = require('./handle')
+const { pathCheck, clearStashCode, stashCode, checkoutTest, fetchCode, getShortLog } = require('./handle')
 const { print } = require('../utils')
 
 /**
@@ -14,6 +14,7 @@ const handlePcCode = async (name, gitUrl, branch) => {
     await stashCode(name)
     await fetchCode(name, gitUrl, branch)
     await checkoutTest(name, branch)
+    await getShortLog(name, gitUrl)
     print.photo('PC端流程')
   } catch (err) {
     print.error(err.toString())

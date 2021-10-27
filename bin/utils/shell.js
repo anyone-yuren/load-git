@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-10-26 20:18:18
+ * @LastEditTime: 2021-10-27 17:11:46
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \pc-build-cli\bin\utils\shell.js
+ */
 // todo 查看所有文件
 const ls = () => 'Dir'
 
@@ -35,6 +43,9 @@ const yarn = () => 'yarn'
 // todo 编译
 const build = order => `yarn ${order}`
 
+// 获取维护者信息
+const shortLog = () => `git shortlog --numbered`
+
 const shell = {
   ls,
   deleteDir,
@@ -47,7 +58,8 @@ const shell = {
   gitPull,
   yarn,
   build,
-  cpFile
+  cpFile,
+  shortLog
 }
 
 module.exports = shell
