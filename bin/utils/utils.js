@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-10-26 20:18:18
- * @LastEditTime: 2021-10-27 15:55:53
- * @LastEditors: your name
+ * @LastEditTime: 2021-10-27 16:00:49
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \pc-build-cli\bin\utils\utils.js
  */
@@ -24,24 +24,24 @@ const enOrder = (order, overErr = false, returnInfo = false) => {
       const child = spawn(order, {
         shell: true
       })
+      child.stdout.on('data', data => {
+        print.info(data.toString())
+      })
+      child.stderr.on('data', data => {
+        // 错误格式处理
+        if (overErr) {
+          print.red(data.toString())
+        } else {
+          reject(data.toString())
+        }
+      })
+      child.on('close', data => {
+        resolve(returnInfo ? data : true)
+      })
       
     } catch (error) {
       console.log(error)
     }
-    child.stdout.on('data', data => {
-      print.info(data.toString())
-    })
-    child.stderr.on('data', data => {
-      // 错误格式处理
-      if (overErr) {
-        print.red(data.toString())
-      } else {
-        reject(data.toString())
-      }
-    })
-    child.on('close', data => {
-      resolve(returnInfo ? data : true)
-    })
   })
 }
 
