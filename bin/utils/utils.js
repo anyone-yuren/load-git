@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-10-26 20:18:18
- * @LastEditTime: 2021-10-27 17:01:10
+ * @LastEditTime: 2021-10-27 18:04:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \pc-build-cli\bin\utils\utils.js
@@ -11,13 +11,29 @@ const path = require('path')
 const { spawn, exec } = require('child_process')
 const print = require('./print')
 
-const getVersion = (order) => {
-  return new Promise((resovle, reject) => {
-      exec(`${order}`, { encoding: 'utf-8' }, (stdout, error, status, output) => {
-          error ? reject(error) : resovle(stdout)
-      });
+const gitExec = command => (
+  new Promise((resolve, reject) => {
+    const thread = spawn('git', command, { stdio: ['inherit', 'pipe', 'pipe'] });
+    const stdOut = [];
+    const stdErr = [];
+
+    thread.stdout.on('data', (data) => {
+      stdOut.push(data.toString('utf8'));
+    });
+
+    thread.stderr.on('data', (data) => {
+      stdErr.push(data.toString('utf8'));
+    });
+
+    thread.on('close', () => {
+      if (stdErr.length) {
+        reject(stdErr.join(''));
+        return;
+      }
+      resolve(stdOut.join());
+    });
   })
-}
+);
 
 /**
  * todo 运行命令
@@ -108,7 +124,7 @@ const utils = {
   enOrder,
   enOrderByPath,
   deleteFolderSync,
-  getVersion
+  gitExec
 }
 
 module.exports = utils
