@@ -15,7 +15,6 @@ let isGit = false
 
 // * 成功处理
 const successOn = resolve => {
-  debugger
   return data => {
     load.succeed()
     console.log(data)
